@@ -10,13 +10,13 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 
 firebase.initializeApp({
-  apiKey: "AIzaSyDPxMfHTkLQnN7JbNHLWlu76-sdaIW-g5Q",
-    authDomain: "rocketleague-f4ebf.firebaseapp.com",
-    projectId: "rocketleague-f4ebf",
-    storageBucket: "rocketleague-f4ebf.appspot.com",
-    messagingSenderId: "780372147818",
-    appId: "1:780372147818:web:170fe979182142a0ec5413",
-    measurementId: "G-598J8BQ5PC"
+    apiKey: "AIzaSyAGTaQFDPGlkS1nd5mwsLsSg3zr_WCbgjQ",
+    authDomain: "rocketchat-7630b.firebaseapp.com",
+    projectId: "rocketchat-7630b",
+    storageBucket: "rocketchat-7630b.appspot.com",
+    messagingSenderId: "675529318607",
+    appId: "1:675529318607:web:9b4c8ce7b21168a72d97ba",
+    measurementId: "G-QQ580R33CL"
 });
 
 const auth = firebase.auth();
