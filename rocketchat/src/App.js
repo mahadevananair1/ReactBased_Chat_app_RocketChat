@@ -79,15 +79,18 @@ function ChatRoom() {
 
     e.preventDefault();
 
-    const {uid} = auth.currentUser;
+    const {uid,photoURL} = auth.currentUser;
 
     await messagesRef.add({
       text:formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
-      uid
+      uid,
+      photoURL
     });
 
     setFormValue('');
+
+    dummy.current.scrollIntoView({ behavior : 'smooth'});
   }
 
   
@@ -97,6 +100,7 @@ function ChatRoom() {
 
       {messages && messages.map(msg => <ChatMessage key={msg.id} message={msg} />)}
 
+      <div ref = {dummy}></div>
       <form onSubmit = {sendMessage}>
           <input value={formValue} onChange={(e) => setFormValue(e.target.value)} />
           <button type="submit">submit</button>
@@ -110,11 +114,12 @@ function ChatRoom() {
 
 
 function ChatMessage(props) {
-  const {text,uid} = props.message;
+  const {text,uid,photoURL} = props.message;
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
   console.log(props)
   return (
-    <div>
+    <div className={'message ${messageClass}'}>
+      <img src={photoURL} />
       <p>{text}</p>
     </div>
   )
