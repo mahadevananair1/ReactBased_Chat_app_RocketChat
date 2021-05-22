@@ -31,7 +31,8 @@ function App() {
   return (
     <div className="App">
       <header>
-        <h1>⚛️🔥💬</h1>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous"></link>
+        <h1>&#129322;Rocket Chat🚯</h1>
         <SignOut />
       </header>
 
@@ -53,7 +54,7 @@ function SignIn() {
   return (
     <>
       <button className="sign-in" onClick={signInWithGoogle}>Sign in with Google</button>
-      <p>Do not violate the community guidelines or you will be banned for life!</p>
+      <p className='text-center container'>Do not violate the community guidelines or you will be banned for life!</p>
     </>
   )
 
@@ -69,9 +70,9 @@ function SignOut() {
 function ChatRoom() {
   const dummy = useRef();
   const messagesRef = firestore.collection('messages');
-  const query = messagesRef.orderBy('createdAt').limit(25);
+  const query = messagesRef.orderBy('createdAt');
 
-  const [messages] = useCollectionData(messagesRef, { idField: 'id' });
+  const [messages] = useCollectionData(query, { idField: 'id' });
 
   const [formValue,setFormValue] = useState('');
   
@@ -80,6 +81,12 @@ function ChatRoom() {
     e.preventDefault();
 
     const {uid,photoURL} = auth.currentUser;
+
+
+    if (!formValue) {
+      alert("Cant go Speechless here buddy ;)");
+      return false;
+    }
 
     await messagesRef.add({
       text:formValue,
@@ -103,7 +110,7 @@ function ChatRoom() {
       <div ref = {dummy}></div>
       <form onSubmit = {sendMessage}>
           <input value={formValue} onChange={(e) => setFormValue(e.target.value)} />
-          <button type="submit">submit</button>
+          <button type="submit">💌</button>
       </form>
 
     </main>
@@ -118,7 +125,7 @@ function ChatMessage(props) {
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
   console.log(props)
   return (
-    <div className={'message ${messageClass}'}>
+    <div className={`message ${ messageClass }`}>
       <img src={photoURL} />
       <p>{text}</p>
     </div>
