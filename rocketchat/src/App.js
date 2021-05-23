@@ -80,7 +80,7 @@ function ChatRoom() {
 
     e.preventDefault();
 
-    const {uid,photoURL} = auth.currentUser;
+    const {uid,photoURL,displayName} = auth.currentUser;
 
 
     if (!formValue) {
@@ -92,7 +92,8 @@ function ChatRoom() {
       text:formValue,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
       uid,
-      photoURL
+      photoURL,
+      displayName
     });
 
     setFormValue('');
@@ -121,13 +122,17 @@ function ChatRoom() {
 
 
 function ChatMessage(props) {
-  const {text,uid,photoURL} = props.message;
+  const {text,uid,photoURL,displayName} = props.message;
   const messageClass = uid === auth.currentUser.uid ? 'sent' : 'received';
   console.log(props)
   return (
+    <div className= {`text-muted ${ messageClass }`}>{ displayName }
+    
+    
     <div className={`message ${ messageClass }`}>
       <img src={photoURL} />
       <p>{text}</p>
+    </div>
     </div>
   )
   
